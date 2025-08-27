@@ -26,25 +26,25 @@ static int	ft_fill_stashed(char **stashed, char *buffer)
 	return (1);
 }
 
-static int	ft_get_line_from_buffer(char **line, char **stashed, char *buffer, char *p)
+static int	ft_get_line_from_buffer(char **l, char **stash, char *buf, char *p)
 {
 	int		len_stashed;
 
 	len_stashed = 0;
-	if (*stashed)
-		len_stashed = ft_strlen(*stashed);
-	*line = (char *)malloc(sizeof(char) * (len_stashed + (p - buffer) + 1));
-	if (!*line)
+	if (*stash)
+		len_stashed = ft_strlen(*stash);
+	*l = (char *)malloc(sizeof(char) * (len_stashed + (p - buf) + 1));
+	if (!*l)
 		return (-1);
-	if (*stashed)
+	if (*stash)
 	{
-		*line = ft_strncpy(*line, *stashed, ft_strlen(*stashed));
-		*line = ft_strncat(*line, buffer, (p - buffer));
+		*l = ft_strncpy(*l, *stash, ft_strlen(*stash));
+		*l = ft_strncat(*l, buf, (p - buf));
 	}
 	else
-		*line = ft_strncpy(*line, buffer, (p - buffer));
-	free(*stashed);
-	*stashed = ft_strdup(buffer + (p - buffer) + 1);
+		*l = ft_strncpy(*l, buf, (p - buf));
+	free(*stash);
+	*stash = ft_strdup(buf + (p - buf) + 1);
 	return (1);
 }
 
