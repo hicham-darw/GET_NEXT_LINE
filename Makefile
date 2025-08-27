@@ -11,9 +11,11 @@ $(LIB): $(OBJS)
 all: $(LIB)
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) *.o
+	make -C libft/ clean
 fclean: clean
-	rm -rf $(LIB)
+	rm -rf $(LIB) test_gnl
+	make -C libft/ fclean
 re: fclean all
 
 .PHONY: all clean fclean re
