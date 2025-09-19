@@ -1,13 +1,16 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-SRCS = $(wildcard *.c)
+SRCS = get_next_line.c
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 LIB = get_next_line.a
+LIBFT = libft.a
 
-$(LIB): $(OBJS)
+$(LIB): $(LIBFT) $(OBJS)
 	ar rcs $(LIB) $(OBJS)
-%.c:%.o
-	$(CC) $(CFLAGS) -c $< -o $@ -I.
+%.o:%.c
+	$(CC) $(CFLAGS) -c $< -o $@ -I libft/includes -L libft/ -lft -I.
+$(LIBFT):
+	make -C libft/
 all: $(LIB)
 
 clean:
