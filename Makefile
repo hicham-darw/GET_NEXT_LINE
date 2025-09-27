@@ -5,7 +5,7 @@ OBJS = $(patsubst %.c, %.o, $(SRCS))
 LIB = get_next_line.a
 LIBFT = libft.a
 
-$(LIB): $(LIBFT) $(OBJS)
+$(LIB): $(OBJS) $(LIBFT)
 	ar rcs $(LIB) $(OBJS)
 %.o:%.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I libft/includes -L libft/ -lft -I.
@@ -14,7 +14,7 @@ $(LIBFT):
 all: $(LIB)
 
 clean:
-	rm -f $(OBJS) *.o
+	rm -f $(OBJS)
 	make -C libft/ clean
 fclean: clean
 	rm -rf $(LIB) test_gnl
