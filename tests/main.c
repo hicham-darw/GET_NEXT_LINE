@@ -24,18 +24,13 @@ int main(int argc, char **argv)
         perror("Error opening file");
         return (1);
     }
-
+	int i = 1;
     while ((ret = get_next_line(fd, &line)) > 0)
     {
-        printf("Line: %s\n", line);
+        printf("%d: %s\n", i++, line);
         free(line);
     }
-    if (ret == 0) // EOF reached
-    {
-        printf("Line: %s\n", line); // print last line
-        free(line);
-    }
-    else if (ret == -1)
+    if (ret == -1)
     {
         printf("Error while reading\n");
     }
