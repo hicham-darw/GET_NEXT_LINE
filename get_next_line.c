@@ -1,4 +1,5 @@
 #include "get_next_line.h"
+#include <stdio.h>
 
 static int	line_stashed(char **line, char **stashed)
 {
@@ -20,7 +21,7 @@ static int	line_stashed(char **line, char **stashed)
 	{
 		*line = ft_strdup(*stashed);
 		free(*stashed);
-		*stashed = ft_strdup("");
+		*stashed = NULL;
 	}
 	return (1);
 }
@@ -29,9 +30,10 @@ static int	remaining_stashed(char **line, char **stashed)
 {
 	if (!stashed || !*stashed)
 		return (-1);
-	if (ft_strlen(*stashed) >= 1)
+	if (ft_strlen(*stashed))
 		return (line_stashed(line, stashed));
 	free(*stashed);
+	*stashed = NULL;
 	return (0);
 }
 
@@ -51,6 +53,7 @@ static int	get_line_append_buffer(char **line, char **stashed, char *buffer)
 	else
 		tmp = ft_strdup(*stashed);
 	free(*stashed);
+	*stashed = NULL;
 	*stashed = ft_strnew(sizeof(char) * (ft_strlen(tmp) + ft_strlen(buffer)));
 	if (!*stashed)
 		return (-1);
